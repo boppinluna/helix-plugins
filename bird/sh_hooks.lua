@@ -1,6 +1,6 @@
 local PLUGIN = PLUGIN
-function PLUGIN:SetupMove(ply, mv, cmd)
-    if ply:Team() == FACTION_BIRD and !ply:OnGround() then
+function PLUGIN:SetupMove(client, mv, cmd)
+    if client:Team() == FACTION_BIRD and !client:OnGround() then
         local speed = ix.config.Get("birdFlightSpeed", 50)
         local angs = mv:GetAngles()
         if cmd:KeyDown(IN_JUMP) then
@@ -18,28 +18,22 @@ end
 
 function PLUGIN:GetPlayerPainSound(client)
 	if client:Team() == FACTION_BIRD then
-		local birdsounds = {
-			"npc/crow/pain2.wav",
-            "npc/crow/pain1.wav"
-		}
+		local birdsounds = {"npc/crow/pain2.wav","npc/crow/pain1.wav"}
 		return ix.config.Get("birdDeathSounds", true) and table.Random(birdsounds)
 	end
 end
 
 function PLUGIN:IsCharacterRecognized(character, id)
-	local ply = character:GetPlayer()
+	local client = character:GetPlayer()
 	local other = ix.char.loaded[id]:GetPlayer()
-	if other and ix.config.Get("birdRecogniseEachother", true) and (ply:Team() == FACTION_BIRD and other:Team() == FACTION_BIRD) then
+	if other and ix.config.Get("birdRecogniseEachother", true) and (client:Team() == FACTION_BIRD and other:Team() == FACTION_BIRD) then
 		return true
 	end
 end
 
 function PLUGIN:GetPlayerDeathSound(client)
 	if client:Team() == FACTION_BIRD then
-		local birdsounds = {
-            "npc/crow/die1.wav",
-            "npc/crow/die2.wav"
-		}
+		local birdsounds = {"npc/crow/die1.wav","npc/crow/die2.wav"}
 		return ix.config.Get("birdDeathSounds", true) and table.Random(birdsounds)
 	end
 end
