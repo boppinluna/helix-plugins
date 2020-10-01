@@ -11,7 +11,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ]]
 
 ix.util.Include("sh_hooks.lua")
-ix.util.Include("cl_hooks.lua")
 ix.util.Include("sv_hooks.lua")
 
 ix.config.Add("birdAllowItemInteract", true, "Allow a bird to interact with items.", nil, {
