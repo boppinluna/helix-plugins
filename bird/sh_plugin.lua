@@ -38,3 +38,15 @@ ix.config.Add("birdHealth", 2, "The default health of birds.", nil, {
 	data = {min = 1, max = 100},
 	category = "Bird"
 })
+
+ix.config.Add("birdChat", true, "Allow the birds to talk?", nil, {
+	category = "Bird"
+})
+
+ix.config.Add("birdActions", true, "Allow the birds use /me and /it?", nil, {
+	category = "Bird"
+})
+
+ix.config.Add("birdOOC", true, "Allow the birds use OOC?", nil, {
+	category = "Bird"
+})

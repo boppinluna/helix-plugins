@@ -37,3 +37,27 @@ function PLUGIN:GetPlayerDeathSound(client)
 		return ix.config.Get("birdDeathSounds", true) and table.Random(birdsounds)
 	end
 end
+
+function PLUGIN:PrePlayerMessageSend(client, chatType, message, anonymous)
+	if client:Team() == FACTION_BIRD then
+		local randomBirdWords = {"Chirp","Caw","Squawk","Cheep"}
+		if (chatType == "ic" or chatType == "w" or chatType == "y") and !ix.config.Get("birdChat", true) then
+			local splitedText = string.Split(message, " ")
+			local birdtalk = {}
+
+			for k, v in pairs(splitedText) do
+				local word = table.Random(randomBirdWords)
+				table.insert(birdtalk, word)
+			end
+			text = table.concat(birdtalk, " ")
+			ix.chat.Send(client, chatType, text)
+            return false
+		elseif (chatType == "me" or chatType == "it") and !ix.config.Get("birdActions", true) then
+			client:Notify("You are not able to use this command as Bird!")
+			return false
+		elseif chatType == "ooc" and !ix.config.Get("birdOOC", true) then
+			client:Notify("You are not able to use this command as Bird!")
+			return false
+		end
+	end
+end

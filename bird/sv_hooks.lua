@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 function PLUGIN:PrePlayerLoadedCharacter(client, character, currentChar)
-    if (currentChar:GetFaction() != FACTION_ZOMBIE and currentChar:GetFaction() != FACTION_BIRD) then return end
+    if (IsValid(currentChar) and currentChar:GetFaction() != FACTION_ZOMBIE and currentChar:GetFaction() != FACTION_BIRD) then return end
     client:SetMaxHealth(100)
     client:SetViewOffset(Vector(0,0,64))
     client:SetViewOffsetDucked(Vector(0, 0, 32))
